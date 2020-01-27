@@ -30,6 +30,8 @@ do
 		dailyAmount=$(( $cash-$STAKE ))
 		days[day$i]=$dailyAmount;
 		totalAmount=$((totalAmount+${days[day$i]}));
+	echo day$i":"${days[day$i]}
 done
-		echo "Total Amount Won/Loose after 20 days: "$totalAmount
+echo "Total Amount Won/Loose after 20 days: "$totalAmount
+
 
