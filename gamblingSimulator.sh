@@ -19,7 +19,9 @@ function bet()
 	fi
 }
 
-for (( i=1; i<=20; i++ ))
+function play()
+{
+for (( i=1; i<=$MONTH_DAYS; i++ ))
 do
 	cash=$STAKE
 	dailyAmount=0;
@@ -34,6 +36,12 @@ do
 		j=$i
 		days[day$j]=$totalAmount
 done
+   echo "Total Amount Won/Loose after 20 days: "$totalAmount
+   echo "Luckiest day: ";
+   luck | sort -k2 -rn | head -1;
+   echo "UnLuckiest day: ";
+   luck | sort -k2 -rn | tail -1;
+}
 
 function luck()
 {
@@ -42,8 +50,21 @@ do
 	echo $k "${days[$k]}"
 done
 }
-echo "Total Amount Won/Loose after 20 days: "$totalAmount
-echo "Luckiest day: "; 
-luck | sort -k2 -rn | head -1;
-echo "UnLuckiest day: "; 
-luck | sort -k2 -rn | tail -1;
+
+function ask()
+{
+while [[ ${days[day20]} -ge 0 ]]
+do
+   echo "Do you want to Continue playing ?";
+   read ch;
+   if [[ $ch == "y" ]]
+   then
+      play
+   else
+      echo "Thank you for Playing";
+   	break;
+	fi
+done
+}
+play
+ask
