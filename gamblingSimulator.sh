@@ -29,9 +29,21 @@ do
 	done
 		dailyAmount=$(( $cash-$STAKE ))
 		days[day$i]=$dailyAmount;
-		totalAmount=$((totalAmount+${days[day$i]}));
-	echo day$i":"${days[day$i]}
+		totalAmount=$(( totalAmount+${days[day$i]} ))
+		echo day$i":" ${days[day$i]} ":" $totalAmount
+		j=$i
+		days[day$j]=$totalAmount
 done
+
+function luck()
+{
+for k in ${!days[@]}
+do
+	echo $k "${days[$k]}"
+done
+}
 echo "Total Amount Won/Loose after 20 days: "$totalAmount
-
-
+echo "Luckiest day: "; 
+luck | sort -k2 -rn | head -1;
+echo "UnLuckiest day: "; 
+luck | sort -k2 -rn | tail -1;
